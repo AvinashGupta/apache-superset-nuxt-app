@@ -29,7 +29,7 @@ function resetEmbeddedDashboard() {
         expanded: false,
       },
       urlParams: {
-        user_id: userId.value, // 'b4088789-37e3-4839-9952-2e0dd1bb97fb',
+        user_id: userId.value,
       }
     },
   });
@@ -41,16 +41,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>Superset dashboard embedded inside VueJs app</h2>
-  <UInput v-model="dashboardId" />
-  <UInput v-model="userId"  @change="resetEmbeddedDashboard()"/>
+  <div class="p-3">
+    <h2 class="mt-2 mb-2">Superset dashboard embedded inside VueJs app</h2>
+    <div class="grid grid-cols-4 gap-4 mb-3">
+      <div>
+        <UInput v-model="dashboardId" placeholder="dashboard id"/>
+      </div>
+      <UInput v-model="userId" placeholder="user id"/>
+      <div>
+        <UButton @click="resetEmbeddedDashboard()">Update Dashboard</UButton>
+      </div>
+    </div>
+  </div>
   <div ref="iframeRef"></div>
 </template>
 
 <style module>
   h2 {
     font-size: 20px;
-    margin: 15px 0;
   }
   iframe {
     width: 100%;
