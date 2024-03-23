@@ -14,7 +14,7 @@ function generateGuestGToken({
   if (!supersetGuestJwtAudience || !supersetGuestJwtSecret) {
     throw new Error('Guest secrets not found')   
   }
-  console.log('..', dashboardId, supersetGuestJwtAudience, supersetGuestJwtSecret)
+  
   const now = Date.now()
   const exp = now + 1000 * 60 * 5
   const resources = [{ "type": "dashboard", "id": dashboardId }]
@@ -33,9 +33,7 @@ function generateGuestGToken({
 
 export default defineEventHandler((event) => {
   const secrets = useRuntimeConfig();
-  console.log('asdads')
-  const { dashboardId } = getQuery<{ dashboardId: string }>(event);
-  
+  const { dashboardId } = getQuery<{ dashboardId: string }>(event);  
   const guestToken = generateGuestGToken({...secrets, dashboardId})
 
   return { guestToken }
